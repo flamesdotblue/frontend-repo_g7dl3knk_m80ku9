@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Truck } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const SLOTS = ['10:00 - 12:00', '12:00 - 14:00', '14:00 - 16:00', '16:00 - 18:00', '18:00 - 20:00'];
 
@@ -13,11 +14,11 @@ export default function OrderSection() {
   }
 
   return (
-    <section id="order" className="relative py-16 sm:py-20 bg-white">
+    <section id="order" className="relative py-20 bg-white">
       <div className="container mx-auto px-6">
         <div className="flex items-end justify-between">
           <div>
-            <p className="tracking-widest uppercase text-xs text-rose-500/80 mb-2">Fast Checkout</p>
+            <p className="tracking-[0.2em] uppercase text-xs text-rose-500/80 mb-2">Fast Checkout</p>
             <h2 className="text-3xl sm:text-4xl font-semibold text-rose-950">Order with same-day delivery</h2>
           </div>
           <div className="hidden sm:flex items-center gap-2 text-rose-700">
@@ -28,7 +29,13 @@ export default function OrderSection() {
 
         <form onSubmit={handleSubmit} className="mt-8 grid lg:grid-cols-3 gap-8">
           {/* Details */}
-          <div className="lg:col-span-2 rounded-3xl bg-white p-6 sm:p-8 ring-1 ring-rose-100">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="lg:col-span-2 rounded-3xl bg-white p-6 sm:p-8 ring-1 ring-rose-100"
+          >
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-rose-900 mb-1">Full name</label>
@@ -68,23 +75,31 @@ export default function OrderSection() {
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Summary */}
-          <aside className="rounded-3xl bg-rose-50 p-6 ring-1 ring-rose-100">
-            <h3 className="font-medium text-rose-900">Order summary</h3>
-            <p className="mt-2 text-sm text-rose-900/70">Customized set + same-day delivery</p>
-            <div className="mt-4 space-y-2 text-sm">
-              <div className="flex justify-between"><span>Design</span><span>Custom</span></div>
-              <div className="flex justify-between"><span>Delivery</span><span>Included</span></div>
-              <div className="flex justify-between"><span>Est. arrival</span><span>Today</span></div>
+          <motion.aside
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.05 }}
+            viewport={{ once: true }}
+            className="rounded-3xl p-[1px] bg-gradient-to-br from-rose-200 via-white to-purple-200"
+          >
+            <div className="rounded-[calc(1.5rem-1px)] bg-rose-50 p-6 ring-1 ring-rose-100">
+              <h3 className="font-medium text-rose-900">Order summary</h3>
+              <p className="mt-2 text-sm text-rose-900/70">Customized set + same-day delivery</p>
+              <div className="mt-4 space-y-2 text-sm">
+                <div className="flex justify-between"><span>Design</span><span>Custom</span></div>
+                <div className="flex justify-between"><span>Delivery</span><span>Included</span></div>
+                <div className="flex justify-between"><span>Est. arrival</span><span>Today</span></div>
+              </div>
+              <div className="mt-6 pt-4 border-t border-rose-100 flex justify-between font-medium">
+                <span>Total</span>
+                <span>$39</span>
+              </div>
+              <button type="submit" className="mt-6 w-full rounded-full bg-gradient-to-r from-rose-600 to-pink-500 text-white px-6 py-3 font-medium shadow-lg shadow-rose-300/40 hover:from-rose-700 hover:to-pink-600 transition">Place order</button>
             </div>
-            <div className="mt-6 pt-4 border-t border-rose-100 flex justify-between font-medium">
-              <span>Total</span>
-              <span>$39</span>
-            </div>
-            <button type="submit" className="mt-6 w-full rounded-full bg-rose-600 text-white px-6 py-3 font-medium shadow-lg shadow-rose-300/40 hover:bg-rose-700 transition">Place order</button>
-          </aside>
+          </motion.aside>
         </form>
       </div>
     </section>

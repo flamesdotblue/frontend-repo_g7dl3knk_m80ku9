@@ -17,7 +17,7 @@ function App() {
             <a href="#explore" className="hover:text-rose-900">Explore</a>
             <a href="#customize" className="hover:text-rose-900">Customize</a>
             <a href="#order" className="hover:text-rose-900">Order</a>
-            <a href="#contact" className="rounded-full bg-rose-600 text-white px-4 py-2 font-medium hover:bg-rose-700 transition">Contact</a>
+            <a href="#contact" className="rounded-full bg-gradient-to-r from-rose-600 to-pink-500 text-white px-4 py-2 font-medium hover:from-rose-700 hover:to-pink-600 transition">Contact</a>
           </nav>
         </div>
       </header>
@@ -73,7 +73,7 @@ function App() {
       <a
         href="#"
         aria-label="Chat support"
-        className="fixed bottom-5 right-5 inline-flex items-center gap-2 rounded-full bg-rose-600 text-white px-4 py-3 shadow-lg shadow-rose-300/40 hover:bg-rose-700 transition"
+        className="fixed bottom-5 right-5 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-rose-600 to-pink-500 text-white px-4 py-3 shadow-lg shadow-rose-300/40 hover:from-rose-700 hover:to-pink-600 transition"
       >
         <MessageCircle className="h-5 w-5" />
         <span className="hidden sm:inline">Chat</span>

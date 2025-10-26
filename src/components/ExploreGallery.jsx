@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Sparkles, Star } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const ALL_DESIGNS = [
   { id: 1, title: 'Rosé Quartz', tag: 'Minimal', color: '#f8d7da', image: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?q=80&w=1200&auto=format&fit=crop' },
@@ -22,16 +23,16 @@ export default function ExploreGallery() {
   }, [active]);
 
   return (
-    <section id="explore" className="relative py-16 sm:py-20 bg-white">
+    <section id="explore" className="relative py-20 bg-white">
       <div className="container mx-auto px-6">
         <div className="flex items-end justify-between gap-4">
           <div>
-            <p className="tracking-widest uppercase text-xs text-rose-500/80 mb-2">Explore Designs</p>
+            <p className="tracking-[0.2em] uppercase text-xs text-rose-500/80 mb-2">Explore Designs</p>
             <h2 className="text-3xl sm:text-4xl font-semibold text-rose-950">Curated looks for every mood</h2>
           </div>
           <div className="hidden sm:flex items-center gap-2 text-rose-700">
             <Star className="h-4 w-4" />
-            <span className="text-sm">Premium, salon-grade finishes</span>
+            <span className="text-sm">Salon-grade finishes</span>
           </div>
         </div>
 
@@ -49,12 +50,26 @@ export default function ExploreGallery() {
           ))}
         </div>
 
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.1 }}
+          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.06 } } }}
+          className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
           {filtered.map((d) => (
-            <article key={d.id} className="group rounded-3xl overflow-hidden ring-1 ring-rose-100 hover:ring-rose-200 transition bg-white">
+            <motion.article
+              key={d.id}
+              variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
+              className="group relative rounded-3xl overflow-hidden ring-1 ring-rose-100 bg-white"
+            >
               <div className="relative aspect-[4/3] overflow-hidden">
-                <img src={d.image} alt={d.title} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-60" />
+                <img
+                  src={d.image}
+                  alt={d.title}
+                  className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
                 <div className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-white/80 backdrop-blur px-3 py-1 text-xs text-rose-700 ring-1 ring-white">
                   <Sparkles className="h-3 w-3 text-rose-600" /> {d.tag}
                 </div>
@@ -65,13 +80,13 @@ export default function ExploreGallery() {
                   <div className="h-4 w-10 rounded-full" style={{ background: d.color }} />
                 </div>
                 <div className="mt-3 flex items-center gap-3">
-                  <button className="px-3 py-1.5 rounded-full text-sm bg-rose-600 text-white hover:bg-rose-700 transition">Customize</button>
-                  <button className="px-3 py-1.5 rounded-full text-sm bg-white ring-1 ring-rose-200 text-rose-700 hover:bg-rose-50 transition">Quick Order</button>
+                  <a href="#customize" className="px-3 py-1.5 rounded-full text-sm bg-rose-600 text-white hover:bg-rose-700 transition">Customize</a>
+                  <a href="#order" className="px-3 py-1.5 rounded-full text-sm bg-white ring-1 ring-rose-200 text-rose-700 hover:bg-rose-50 transition">Quick Order</a>
                 </div>
               </div>
-            </article>
+            </motion.article>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
